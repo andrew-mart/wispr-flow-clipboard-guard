@@ -1,7 +1,12 @@
 {
-  "name": "wispr-clipboard-fix",
+  "name": "wispr-flow-clipboard-guard",
+  "description": "Patch for Wispr Flow on Windows: dictation no longer pastes the previous clipboard",
   "private": true,
+  "license": "MIT",
   "type": "module",
+  "engines": {
+    "node": ">=22.6"
+  },
   "scripts": {
     "test": "node --experimental-strip-types --no-warnings --test \"src/**/*.test.ts\"",
     "typecheck": "tsc --noEmit",
