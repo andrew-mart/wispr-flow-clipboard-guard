@@ -40,7 +40,8 @@ The patch edits one file, `.webpack/main/index.js`, inside `resources/app.asar` 
 - every feature-flag update sent to the Helper carries `disable-clipboard-restore` enabled, so the Helper no
   longer restores the clipboard on the first read;
 - the Helper's `PasteText` request is wrapped: the clipboard is captured before the paste and put back
-  **1.5 s after the Helper answers** — unless something else has been copied in the meantime;
+  **8 s after the Helper answers** — unless something else has been copied in the meantime. A busy browser on a
+  loaded machine can take several seconds to handle Ctrl+V; with 1.5 s it still pasted the previous clipboard;
 - the Helper's `GetSelectedTextViaCopy` request (used by Polish) is wrapped the same way, restoring right after
   the answer.
 
@@ -68,7 +69,8 @@ npm run apply -- --restart
 runs, and starts it again afterwards. Without it the patcher refuses to touch a running version.
 
 **Run it again after every Wispr Flow update.** Squirrel installs each update into a new `app-X.Y.Z` folder with an
-unpatched `app.asar`. Running it on an already patched version does nothing.
+unpatched `app.asar`. Running it on an already patched version does nothing: to move a patched version to a newer
+patch, [undo](#undo) first, then run it.
 
 ## Undo
 

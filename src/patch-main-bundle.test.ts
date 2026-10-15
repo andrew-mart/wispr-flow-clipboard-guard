@@ -85,9 +85,19 @@ test('a paste the bundle sends gets the clipboard from before back after the del
 
   functions.ae('dictated text ', null);
   await answersArrive();
-  mock.timers.tick(1500);
+  mock.timers.tick(8000);
 
   assert.equal(clipboardText(), 'copied before');
+});
+
+test('a target too busy to paste for seconds still finds the dictated text on the clipboard', async () => {
+  const { functions, clipboardText } = runPatched(bundle1_6_1102, { clipboardText: 'copied before' });
+
+  functions.ae('dictated text ', null);
+  await answersArrive();
+  mock.timers.tick(5000);
+
+  assert.equal(clipboardText(), 'dictated text ');
 });
 
 test('a selection the bundle has the Helper copy is replaced by the clipboard from before', async () => {

@@ -11,8 +11,11 @@ export type PatchOutcome =
 
 const marker = '/*wispr-clipboard-guard*/';
 
-/** Long enough for Brave with a busy page to read the clipboard; Wispr's text is on it for that long. */
-const restoreDelayMs = 1500;
+/**
+ * Long enough for Brave on a loaded machine to read the clipboard; Wispr's text is on it for that long. 1.5 s was not:
+ * Brave pasted the clipboard from before.
+ */
+const restoreDelayMs = 8000;
 
 // Created on the first paste, when Electron is up; the bundle is a CommonJS script, so `require` is in scope.
 const guardDefinition =
